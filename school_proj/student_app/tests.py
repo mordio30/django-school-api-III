@@ -44,7 +44,7 @@ class Test_student(TestCase):
             self.fail()
         except ValidationError as e:
             # print(e.message_dict)
-            self.assert_(
+            self.assertTrue(
                 "student_email" in e.message_dict and "personal_email" in e.message_dict
             )
 
@@ -62,7 +62,7 @@ class Test_student(TestCase):
             self.fail()
         except Exception as e:
             # print(e)
-            self.assert_(
+            self.assertTrue(
                 "Field 'locker_number' expected a number but got 'None'" in str(e)
             )
 
@@ -80,7 +80,7 @@ class Test_student(TestCase):
             self.fail()
         except IntegrityError as e:
             # print(e)
-            self.assert_('null value in column "locker_combination" ' in str(e))
+            self.assertTrue('null value in column "locker_combination" ' in str(e))
 
     def test_005_student_with_improper_name_field(self):
         try:
@@ -96,7 +96,7 @@ class Test_student(TestCase):
             self.fail()
         except Exception as e:
             # print(e)
-            self.assert_('null value in column "name" ' in str(e))
+            self.assertTrue('null value in column "name" ' in str(e))
 
     def test_006_student_with_proper_fields(self):
         new_student = Student.objects.create(
@@ -134,7 +134,7 @@ class Test_student(TestCase):
             self.fail()
         except IntegrityError as e:
             # print("\n\n\n", e, "\n\n\n")
-            self.assert_(
+            self.assertTrue(
                 'duplicate key value violates unique constraint "student_app_student_student_email'
                 in str(e)
             )
@@ -161,7 +161,7 @@ class Test_student(TestCase):
             self.fail()
         except IntegrityError as e:
             # print("\n\n\n", e, "\n\n\n")
-            self.assert_(
+            self.assertTrue(
                 'duplicate key value violates unique constraint "student_app_student_personal_email'
                 in str(e)
             )
@@ -188,7 +188,7 @@ class Test_student(TestCase):
             self.fail()
         except IntegrityError as e:
             # print(e)
-            self.assert_("student_app_student_locker_number" in str(e))
+            self.assertTrue("student_app_student_locker_number" in str(e))
 
     def test_010_student_utilizing_default_values(self):
         new_student = Student.objects.create(
